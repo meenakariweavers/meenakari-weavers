@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#faf7f2;
+}
+
+header{
+background:#8b1e3f;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.product{
+width:90%;
+margin:30px auto;
+background:white;
+padding:20px;
+border-radius:10px;
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.product img{
+width:400px;
+height:550px;
+object-fit:cover;
+border-radius:10px;
+}
+
+.details{
+flex:1;
+}
+
+.price{
+font-size:32px;
+font-weight:bold;
+color:#8b1e3f;
+margin:10px 0;
+}
+
+.old-price{
+text-decoration:line-through;
+color:gray;
+font-size:18px;
+}
+
+button{
+background:#8b1e3f;
+color:white;
+padding:12px 20px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:10px;
+margin-right:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>Meenakari Weavers</h1>
+</header>
+
+<div class="product">
+
+<img id="productImage">
+
+<div class="details">
+
+<h1 id="productName"></h1>
+
+<p class="old-price" id="oldPrice"></p>
+
+<p class="price" id="price"></p>
+
+<p>
+Premium handcrafted saree from Meenakari Weavers.
+Perfect for weddings, festivals and special occasions.
+</p>
+
+<button onclick="addToCart()">
+Add To Cart
+</button>
+
+<button onclick="window.location.href='checkout.html'">
+Buy Now
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const sarees = {
+
+royalsilk:{
+name:"Royal Silk Saree",
+price:"2499",
+old:"₹2999",
+image:"images/royal-silk.jpg"
+},
+
+kanchipuram:{
+name:"Royal Kanchipuram Silk",
+price:"3299",
+old:"₹3999",
+image:"images/kanchipuram.jpg"
+},
+
+banarasi:{
+name:"Banarasi Gold Weave",
+price:"2999",
+old:"₹3599",
+image:"images/banarasi-gold.jpg"
+},
+
+weddingred:{
+name:"Wedding Red Royal",
+price:"3499",
+old:"₹4299",
+image:"images/wedding-red.jpg"
+},
+
+designer:{
+name:"Designer Royal Fusion",
+price:"2199",
+old:"₹2799",
+image:"images/designer.jpg"
+},
+
+peacock:{
+name:"Peacock Blue Silk",
+price:"2799",
+old:"₹3399",
+image:"images/peacock-blue.jpg"
+},
+
+floral:{
+name:"Floral Cotton Elegance",
+price:"1499",
+old:"₹1999",
+image:"images/floral-cotton.jpg"
+},
+
+bridal:{
+name:"Premium Bridal Heritage",
+price:"4999",
+old:"₹5999",
+image:"images/bridal.jpg"
+}
+
+};
+
+const params = new URLSearchParams(window.location.search);
+
+const product = params.get("product");
+
+const item = sarees[product];
+
+if(item){
+
+document.getElementById("productName").innerHTML =
+item.name;
+
+document.getElementById("price").innerHTML =
+"₹" + item.price;
+
+document.getElementById("oldPrice").innerHTML =
+item.old;
+
+document.getElementById("productImage").src =
+item.image;
+
+}
+
+function addToCart(){
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+
+name:item.name,
+price:item.price,
+image:item.image
+
+});
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+alert("Added To Cart!");
+
+window.location.href =
+"cart.html";
+
+}
+
+</script>
+
+</body>
+</html>

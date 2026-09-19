@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Meenakari Weavers</title>
 
 <style>
@@ -21,190 +22,381 @@ background:#faf7f2;
 /* HERO SECTION */
 
 .hero{
-background:#8b1e3f;
-color:white;
-padding:40px 5%;
-min-height:500px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-flex-wrap:wrap;
-}
 
-.hero-content{
-max-width:500px;
+background:
+linear-gradient(
+rgba(0,0,0,.55),
+rgba(0,0,0,.55)
+),
+
+url("bridal.jpg");
+
+background-size:cover;
+background-position:center;
+
+color:white;
+text-align:center;
+padding:70px 20px;
+
 }
 
 .hero h1{
-font-size:60px;
-margin-bottom:15px;
+
+font-size:55px;
+margin-bottom:10px;
+
 }
 
 .hero p{
+
 font-size:20px;
 margin-bottom:20px;
+
 }
 
-.offer{
+.discount-badge{
+
 display:inline-block;
 background:#ffd700;
 color:black;
+
 padding:10px 20px;
-border-radius:30px;
+
+border-radius:25px;
+
 font-weight:bold;
-margin-bottom:20px;
+
+margin-bottom:25px;
+
 }
 
-.search-box{
+/* SEARCH */
+
+.search-container{
+
 display:flex;
-background:white;
-border-radius:40px;
-overflow:hidden;
-width:100%;
+justify-content:center;
+align-items:center;
+gap:8px;
+flex-wrap:wrap;
+
+}
+
+.search-container input{
+
+width:60%;
 max-width:500px;
-}
 
-.search-box input{
-flex:1;
+padding:14px;
+
 border:none;
-padding:15px;
-outline:none;
-}
-
-.search-box button{
-border:none;
-background:white;
-padding:15px;
-cursor:pointer;
-font-size:18px;
-}
-
-.shop-btn{
-display:inline-block;
-margin-top:20px;
-background:white;
-color:#8b1e3f;
-padding:12px 25px;
 border-radius:30px;
-text-decoration:none;
+
+font-size:16px;
+
+}
+
+.search-btn{
+
+background:white;
+
+border:none;
+
+padding:14px;
+
+border-radius:50%;
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+/* NAVBAR */
+
+.navbar{
+
+background:white;
+
+padding:15px 30px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+
+}
+
+.logo-title{
+
+font-size:22px;
 font-weight:bold;
+color:#8b1e3f;
+
 }
 
-/* COLLAGE */
+.cart-box{
 
-.collage{
-display:grid;
-grid-template-columns:repeat(2,180px);
-gap:15px;
-}
+background:#8b1e3f;
+color:white;
 
-.collage img{
-width:180px;
-height:220px;
-object-fit:cover;
-border-radius:15px;
-box-shadow:0 5px 15px rgba(0,0,0,.3);
+padding:10px 18px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+text-decoration:none;
+
 }
 
 /* OFFERS */
 
-.offers{
-padding:40px 5%;
+.offer-section{
+
 display:flex;
 gap:20px;
-justify-content:center;
 flex-wrap:wrap;
+
+justify-content:center;
+
+padding:30px 20px;
+
 }
 
-.offer-card{
-background:white;
+.offer{
+
+background:#8b1e3f;
+
+color:white;
+
 padding:20px;
-border-radius:12px;
-width:250px;
-text-align:center;
-box-shadow:0 3px 10px rgba(0,0,0,.15);
-}
 
-.offer-card h3{
-color:#8b1e3f;
-margin-bottom:10px;
+border-radius:10px;
+
+width:280px;
+
+text-align:center;
+
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+
 }
 
 /* PRODUCTS */
 
-.products-title{
-text-align:center;
-font-size:36px;
-margin-top:20px;
-color:#8b1e3f;
-}
-
 .products{
-padding:40px 5%;
+
 display:grid;
+
 grid-template-columns:
 repeat(auto-fit,minmax(250px,1fr));
+
 gap:20px;
+
+padding:30px;
+
 }
 
 .card{
+
 background:white;
+
 border-radius:12px;
+
 overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-5px);
+
 }
 
 .card img{
+
 width:100%;
 height:320px;
+
 object-fit:cover;
+
 }
 
 .card-content{
+
 padding:15px;
+
+}
+
+.card-content h3{
+
+margin-bottom:10px;
+
 }
 
 .price{
+
 font-size:22px;
 font-weight:bold;
 color:#8b1e3f;
-margin-top:10px;
+
+margin-bottom:10px;
+
 }
 
 .btn{
+
 display:inline-block;
-margin-top:10px;
+
 background:#8b1e3f;
 color:white;
+
 padding:10px 15px;
+
 border-radius:8px;
+
 text-decoration:none;
+
 }
 
-/* AI CHAT */
+/* CHATBOT */
 
-#chatBtn{
+.chat-btn{
+
 position:fixed;
+
 bottom:20px;
 right:20px;
+
 width:60px;
 height:60px;
+
 background:#8b1e3f;
+
 color:white;
-font-size:30px;
+
 border-radius:50%;
+
 display:flex;
-align-items:center;
+
 justify-content:center;
+align-items:center;
+
+font-size:30px;
+
 cursor:pointer;
+
+z-index:999;
+
 }
 
+.chat-window{
+
+position:fixed;
+
+bottom:90px;
+right:20px;
+
+width:300px;
+
+background:white;
+
+border-radius:12px;
+
+box-shadow:0 3px 15px rgba(0,0,0,.25);
+
+display:none;
+
+overflow:hidden;
+
+}
+
+.chat-header{
+
+background:#8b1e3f;
+
+color:white;
+
+padding:12px;
+
+font-weight:bold;
+
+}
+
+.chat-body{
+
+padding:15px;
+
+height:250px;
+
+overflow-y:auto;
+
+}
+
+.chat-input{
+
+display:flex;
+
+border-top:1px solid #ddd;
+
+}
+
+.chat-input input{
+
+flex:1;
+
+padding:12px;
+
+border:none;
+
+}
+
+.chat-input button{
+
+border:none;
+
+background:#8b1e3f;
+
+color:white;
+
+padding:12px;
+
+cursor:pointer;
+
+}
+
+/* FOOTER */
+
 footer{
+
 background:#222;
 color:white;
+
 text-align:center;
+
 padding:20px;
+
 margin-top:30px;
+
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:38px;
+}
+
+.search-container input{
+width:90%;
+}
+
 }
 
 </style>
@@ -212,13 +404,9 @@ margin-top:30px;
 
 <body>
 
+<!-- HERO -->
+
 <section class="hero">
-
-<div class="hero-content">
-
-<div class="offer">
-🔥 UP TO 40% OFF
-</div>
 
 <h1>Meenakari Weavers</h1>
 
@@ -226,280 +414,400 @@ margin-top:30px;
 Tradition Woven Into Timeless Elegance
 </p>
 
-<div class="search-box">
+<div class="discount-badge">
+🔥 UP TO 40% OFF ON BRIDAL COLLECTION
+</div>
+
+<div class="search-container">
 
 <input
 type="text"
+id="searchBox"
 placeholder="Search Sarees...">
 
-<button>🎤</button>
+<button
+class="search-btn"
+onclick="startVoiceSearch()">
 
-<button>📷</button>
+🎤
 
-</div>
+</button>
 
-<a href="#products" class="shop-btn">
-Shop Now
-</a>
+<button
+class="search-btn"
+onclick="document.getElementById('imageUpload').click()">
 
-</div>
+📷
 
-<div class="collage">
+</button>
 
-<img src="bridal.jpg">
-
-<img src="royal-silk.jpg">
-
-<img src="peacock-blue.jpg">
-
-<img src="wedding-red.jpg">
+<input
+type="file"
+id="imageUpload"
+style="display:none">
 
 </div>
 
 </section>
 
-<section class="offers">
+<!-- NAVBAR -->
 
-<div class="offer-card">
+<div class="navbar">
+
+<div class="logo-title">
+
+Premium Saree Collection
+
+</div>
+
+<a
+href="cart.html"
+class="cart-box">
+
+🛒 Cart
+<span id="cartCount">(0)</span>
+
+</a>
+
+</div>
+
+<!-- OFFERS -->
+
+<section class="offer-section">
+
+<div class="offer">
+
 <h3>Flat 30% OFF</h3>
-<p>On Bridal Collection</p>
+
+<p>
+On Bridal Sarees
+</p>
+
 </div>
 
-<div class="offer-card">
+<div class="offer">
+
 <h3>Buy 2 Get 15% OFF</h3>
-<p>On Silk Sarees</p>
+
+<p>
+On Silk Collection
+</p>
+
 </div>
 
-<div class="offer-card">
+<div class="offer">
+
 <h3>Free Shipping</h3>
-<p>Across India</p>
+
+<p>
+Across India
+</p>
+
 </div>
 
 </section>
 
-<h2 class="products-title" id="products">
-Our Saree Collection
-</h2>
-<section class="products">
-
-<!-- 1 -->
-
+<!-- PRODUCT SECTION STARTS HERE -->
+<section class="products" id="productContainer">
+<!-- PRODUCT 1 -->
 <div class="card">
-
 <img src="royal-silk.jpg">
-
 <div class="card-content">
-
 <h3>Royal Silk Saree</h3>
-
 <p class="price">₹2499</p>
-
-<a href="product-details.html?product=royalsilk"
-class="btn">
-
+<a href="product-details.html?product=royalsilk" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 2 -->
-
+<!-- PRODUCT 2 -->
 <div class="card">
-
 <img src="kanchipuram.jpg">
-
 <div class="card-content">
-
 <h3>Royal Kanchipuram Silk</h3>
-
 <p class="price">₹3299</p>
-
-<a href="product-details.html?product=kanchipuram"
-class="btn">
-
+<a href="product-details.html?product=kanchipuram" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 3 -->
-
+<!-- PRODUCT 3 -->
 <div class="card">
-
 <img src="banarasi-gold.jpg">
-
 <div class="card-content">
-
 <h3>Banarasi Gold Weave</h3>
-
 <p class="price">₹2999</p>
-
-<a href="product-details.html?product=banarasi"
-class="btn">
-
+<a href="product-details.html?product=banarasi" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 4 -->
-
+<!-- PRODUCT 4 -->
 <div class="card">
-
 <img src="wedding-red.jpg">
-
 <div class="card-content">
-
 <h3>Wedding Red Royal</h3>
-
 <p class="price">₹3499</p>
-
-<a href="product-details.html?product=weddingred"
-class="btn">
-
+<a href="product-details.html?product=weddingred" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 5 -->
-
+<!-- PRODUCT 5 -->
 <div class="card">
-
 <img src="designer.jpg">
-
 <div class="card-content">
-
 <h3>Designer Royal Fusion</h3>
-
 <p class="price">₹2199</p>
-
-<a href="product-details.html?product=designer"
-class="btn">
-
+<a href="product-details.html?product=designer" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 6 -->
-
+<!-- PRODUCT 6 -->
 <div class="card">
-
 <img src="peacock-blue.jpg">
-
 <div class="card-content">
-
 <h3>Peacock Blue Silk</h3>
-
 <p class="price">₹2799</p>
-
-<a href="product-details.html?product=peacock"
-class="btn">
-
+<a href="product-details.html?product=peacock" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 7 -->
-
+<!-- PRODUCT 7 -->
 <div class="card">
-
 <img src="floral-cotton.jpg">
-
 <div class="card-content">
-
 <h3>Floral Cotton Elegance</h3>
-
 <p class="price">₹1499</p>
-
-<a href="product-details.html?product=floral"
-class="btn">
-
+<a href="product-details.html?product=floral" class="btn">
 View Product
-
 </a>
-
+</div>
 </div>
 
-</div>
-
-<!-- 8 -->
-
+<!-- PRODUCT 8 -->
 <div class="card">
-
 <img src="bridal.jpg">
-
 <div class="card-content">
-
 <h3>Premium Bridal Heritage</h3>
-
 <p class="price">₹4999</p>
-
-<a href="product-details.html?product=bridal"
-class="btn">
-
+<a href="product-details.html?product=bridal" class="btn">
 View Product
-
 </a>
-
 </div>
-
 </div>
 
 </section>
 
-<div id="chatBtn">
+<!-- CHATBOT -->
+
+<div class="chat-btn" onclick="toggleChat()">
 💬
+</div>
+
+<div class="chat-window" id="chatWindow">
+
+<div class="chat-header">
+Meenakari Assistant
+</div>
+
+<div class="chat-body" id="chatBody">
+
+<p>
+👋 Welcome to Meenakari Weavers.
+How can I help you?
+</p>
+
+</div>
+
+<div class="chat-input">
+
+<input
+type="text"
+id="userMessage"
+placeholder="Type message...">
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+</div>
+
 </div>
 
 <footer>
 
-<h3>Meenakari Weavers</h3>
-
-<br>
-
-<p>
-Tradition Woven Into Timeless Elegance
-</p>
-
-<br>
-
-<p>
 © 2026 Meenakari Weavers
-</p>
 
 </footer>
 
 <script>
 
-document.getElementById("chatBtn")
-.onclick = function(){
+/* SEARCH */
 
-alert(
-"Hello! Welcome to Meenakari AI Assistant. How can I help you today?"
+document
+.getElementById("searchBox")
+.addEventListener("keyup",function(){
+
+let value =
+this.value.toLowerCase();
+
+let cards =
+document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+let title =
+card.querySelector("h3")
+.innerText
+.toLowerCase();
+
+if(title.includes(value)){
+card.style.display="block";
+}
+else{
+card.style.display="none";
+}
+
+});
+
+});
+
+/* VOICE SEARCH */
+
+function startVoiceSearch(){
+
+if(
+'webkitSpeechRecognition'
+in window
+){
+
+const recognition =
+new webkitSpeechRecognition();
+
+recognition.onresult =
+function(event){
+
+document
+.getElementById("searchBox")
+.value =
+event.results[0][0].transcript;
+
+document
+.getElementById("searchBox")
+.dispatchEvent(
+new Event("keyup")
 );
 
 };
+
+recognition.start();
+
+}
+else{
+
+alert(
+"Voice Search Not Supported In This Browser"
+);
+
+}
+
+}
+
+/* CHATBOT */
+
+function toggleChat(){
+
+let chat =
+document.getElementById("chatWindow");
+
+if(chat.style.display==="block"){
+chat.style.display="none";
+}
+else{
+chat.style.display="block";
+}
+
+}
+
+function sendMessage(){
+
+let input =
+document.getElementById("userMessage");
+
+let message =
+input.value.toLowerCase();
+
+let chat =
+document.getElementById("chatBody");
+
+chat.innerHTML +=
+"<p><b>You:</b> "
++ input.value +
+"</p>";
+
+let reply =
+"Please contact support for assistance.";
+
+if(message.includes("bridal")){
+
+reply =
+"We have Premium Bridal Heritage Sarees available.";
+
+}
+
+else if(message.includes("delivery")){
+
+reply =
+"Delivery usually takes 3-7 business days.";
+
+}
+
+else if(message.includes("price")){
+
+reply =
+"Prices start from ₹1499.";
+
+}
+
+else if(message.includes("silk")){
+
+reply =
+"We offer Royal Silk, Peacock Blue Silk and Kanchipuram Silk Sarees.";
+
+}
+
+chat.innerHTML +=
+"<p><b>Bot:</b> "
++ reply +
+"</p>";
+
+input.value="";
+
+chat.scrollTop =
+chat.scrollHeight;
+
+}
+
+/* CART COUNT */
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+document
+.getElementById("cartCount")
+.innerHTML =
+"(" + cart.length + ")";
 
 </script>
 

@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Checkout - Meenakari Weavers</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Cart - MEENAKARI WEAVERS</title>
 
 <style>
 
@@ -21,8 +26,8 @@ background:#f5f5f5;
 header{
 background:#8b1e3f;
 color:white;
-text-align:center;
 padding:20px;
+text-align:center;
 }
 
 .container{
@@ -31,47 +36,62 @@ margin:auto;
 padding:30px 0;
 }
 
-.checkout-wrapper{
+.cart-wrapper{
 display:flex;
 gap:20px;
 flex-wrap:wrap;
 }
 
-.form-section{
+.cart-items{
 flex:2;
 background:white;
-padding:25px;
+padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
-.summary-section{
+.cart-item{
+display:flex;
+gap:20px;
+padding:20px 0;
+border-bottom:1px solid #ddd;
+}
+
+.cart-item img{
+width:120px;
+height:150px;
+object-fit:cover;
+border-radius:8px;
+}
+
+.item-details{
+flex:1;
+}
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#8b1e3f;
+margin-top:10px;
+}
+
+.remove-btn{
+margin-top:10px;
+background:red;
+color:white;
+border:none;
+padding:8px 12px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.summary{
 flex:1;
 background:white;
-padding:25px;
+padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.15);
 height:fit-content;
-}
-
-h2{
-margin-bottom:20px;
-color:#8b1e3f;
-}
-
-input,
-textarea,
-select{
-width:100%;
-padding:12px;
-margin-bottom:15px;
-border:1px solid #ccc;
-border-radius:6px;
-}
-
-textarea{
-resize:none;
-height:100px;
 }
 
 .summary-row{
@@ -81,25 +101,27 @@ margin-bottom:15px;
 }
 
 .total{
-font-size:22px;
+font-size:24px;
 font-weight:bold;
 color:#8b1e3f;
 }
 
-.pay-btn{
+.checkout-btn{
 width:100%;
-padding:14px;
+padding:12px;
 background:#8b1e3f;
 color:white;
 border:none;
 border-radius:8px;
-font-size:16px;
 cursor:pointer;
-margin-top:15px;
+font-size:16px;
+margin-top:20px;
 }
 
-.pay-btn:hover{
-background:#6d1430;
+.empty{
+text-align:center;
+padding:40px;
+font-size:20px;
 }
 
 </style>
@@ -110,90 +132,33 @@ background:#6d1430;
 
 <header>
 
-<h1>Meenakari Weavers</h1>
+<h1>MEENAKARI WEAVERS</h1>
 
-<p>Checkout</p>
+<p>Your Shopping Cart</p>
 
 </header>
 
 <div class="container">
 
-<div class="checkout-wrapper">
+<div class="cart-wrapper">
 
-<div class="form-section">
+<div class="cart-items">
 
-<h2>Delivery Details</h2>
+<h2>Items in Cart</h2>
 
-<form>
-
-<input
-type="text"
-placeholder="Full Name"
-required>
-
-<input
-type="tel"
-placeholder="Mobile Number"
-required>
-
-<textarea
-placeholder="Complete Address"
-required></textarea>
-
-<input
-type="text"
-placeholder="City"
-required>
-
-<input
-type="text"
-placeholder="State"
-required>
-
-<input
-type="text"
-placeholder="Pincode"
-required>
-
-</form>
+<div id="cartItems"></div>
 
 </div>
 
-<div class="summary-section">
+<div class="summary">
 
 <h2>Order Summary</h2>
 
 <div class="summary-row">
 
-<span>Royal Silk Saree</span>
-
-<span>₹2499</span>
-
-</div>
-
-<div class="summary-row">
-
-<span>Peacock Blue Silk</span>
-
-<span>₹2799</span>
-
-</div>
-
-<hr><br>
-
-<div class="summary-row">
-
 <span>Subtotal</span>
 
-<span>₹5298</span>
-
-</div>
-
-<div class="summary-row">
-
-<span>Discount</span>
-
-<span>- ₹500</span>
+<span id="subtotal">₹0</span>
 
 </div>
 
@@ -201,7 +166,7 @@ required>
 
 <span>GST (5%)</span>
 
-<span>₹239</span>
+<span id="gst">₹0</span>
 
 </div>
 
@@ -211,25 +176,149 @@ required>
 
 <span>Total</span>
 
-<span>₹5037</span>
+<span id="total">₹0</span>
 
 </div>
 
-<a href="payment.html">
+<button
+class="checkout-btn"
+onclick="goCheckout()">
 
-<button class="pay-btn">
-
-Continue To Payment
+Proceed To Checkout
 
 </button>
 
-</a>
-
 </div>
 
 </div>
 
 </div>
+
+<script>
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+let cartItems =
+document.getElementById("cartItems");
+
+let subtotal = 0;
+
+function loadCart(){
+
+cartItems.innerHTML="";
+
+subtotal = 0;
+
+if(cart.length===0){
+
+cartItems.innerHTML=
+
+'<div class="empty">🛒 Cart is Empty</div>';
+
+document.getElementById("subtotal")
+.innerHTML="₹0";
+
+document.getElementById("gst")
+.innerHTML="₹0";
+
+document.getElementById("total")
+.innerHTML="₹0";
+
+return;
+
+}
+
+cart.forEach((item,index)=>{
+
+subtotal += Number(item.price);
+
+cartItems.innerHTML += `
+
+<div class="cart-item">
+
+<img src="${item.image}">
+
+<div class="item-details">
+
+<h3>${item.name}</h3>
+
+<p class="price">
+₹${item.price}
+</p>
+
+<button
+class="remove-btn"
+onclick="removeItem(${index})">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+let gst =
+Math.round(subtotal * 0.05);
+
+let total =
+subtotal + gst;
+
+document.getElementById("subtotal")
+.innerHTML =
+"₹" + subtotal;
+
+document.getElementById("gst")
+.innerHTML =
+"₹" + gst;
+
+document.getElementById("total")
+.innerHTML =
+"₹" + total;
+
+}
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+loadCart();
+
+}
+
+function goCheckout(){
+
+if(cart.length===0){
+
+alert(
+"Your cart is empty!"
+);
+
+return;
+
+}
+
+window.location.href =
+"checkout.html";
+
+}
+
+loadCart();
+
+</script>
 
 </body>
+
 </html>

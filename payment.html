@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment - Meenakari Weavers</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Payment - MEENAKARI WEAVERS</title>
 
 <style>
 
@@ -78,6 +83,14 @@ padding:15px;
 border-radius:8px;
 }
 
+.product-row{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+padding-bottom:10px;
+border-bottom:1px solid #ddd;
+}
+
 .summary-row{
 display:flex;
 justify-content:space-between;
@@ -107,13 +120,14 @@ background:#6d1430;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
 
-<h1>Meenakari Weavers</h1>
+<h1>MEENAKARI WEAVERS</h1>
 
 <p>Secure Payment Gateway</p>
 
@@ -176,43 +190,124 @@ placeholder="CVV">
 
 <br>
 
+<div id="paymentItems"></div>
+
+<hr><br>
+
 <div class="summary-row">
 <span>Subtotal</span>
-<span>₹5298</span>
+<span id="subtotal">₹0</span>
 </div>
 
 <div class="summary-row">
-<span>Discount</span>
-<span>- ₹500</span>
-</div>
-
-<div class="summary-row">
-<span>GST</span>
-<span>₹239</span>
+<span>GST (5%)</span>
+<span id="gst">₹0</span>
 </div>
 
 <hr><br>
 
 <div class="summary-row total">
 <span>Total</span>
-<span>₹5037</span>
+<span id="total">₹0</span>
 </div>
 
 </div>
 
-<a href="success.html">
-
-<button class="pay-btn">
+<button
+class="pay-btn"
+onclick="payNow()">
 
 Pay Now
 
 </button>
 
-</a>
-
 </div>
 
 </div>
+
+<script>
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+let paymentItems =
+document.getElementById(
+"paymentItems"
+);
+
+let subtotal = 0;
+
+cart.forEach(item=>{
+
+subtotal +=
+Number(item.price);
+
+paymentItems.innerHTML += `
+
+<div class="product-row">
+
+<span>
+${item.name}
+</span>
+
+<span>
+₹${item.price}
+</span>
+
+</div>
+
+`;
+
+});
+
+let gst =
+Math.round(subtotal * 0.05);
+
+let total =
+subtotal + gst;
+
+document
+.getElementById("subtotal")
+.innerHTML =
+"₹" + subtotal;
+
+document
+.getElementById("gst")
+.innerHTML =
+"₹" + gst;
+
+document
+.getElementById("total")
+.innerHTML =
+"₹" + total;
+
+function payNow(){
+
+if(cart.length===0){
+
+alert(
+"No products found!"
+);
+
+return;
+
+}
+
+alert(
+"Payment Successful!"
+);
+
+localStorage.removeItem("cart");
+
+window.location.href =
+"success.html";
+
+}
+
+</script>
 
 </body>
+
 </html>

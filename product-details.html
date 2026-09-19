@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
 <title>Product Details</title>
 
 <style>
@@ -25,11 +30,11 @@ width:90%;
 margin:30px auto;
 background:white;
 padding:20px;
-border-radius:10px;
+border-radius:12px;
 display:flex;
 flex-wrap:wrap;
 gap:30px;
-box-shadow:0 2px 10px rgba(0,0,0,.15);
+box-shadow:0 3px 12px rgba(0,0,0,.15);
 }
 
 .product img{
@@ -43,11 +48,8 @@ border-radius:10px;
 flex:1;
 }
 
-.price{
-font-size:32px;
-font-weight:bold;
-color:#8b1e3f;
-margin:10px 0;
+.details h1{
+margin-bottom:10px;
 }
 
 .old-price{
@@ -56,15 +58,36 @@ color:gray;
 font-size:18px;
 }
 
+.price{
+font-size:32px;
+font-weight:bold;
+color:#8b1e3f;
+margin:15px 0;
+}
+
+.discount{
+background:#ffd700;
+display:inline-block;
+padding:8px 15px;
+border-radius:20px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
 button{
 background:#8b1e3f;
 color:white;
 padding:12px 20px;
 border:none;
-border-radius:5px;
+border-radius:8px;
 cursor:pointer;
 margin-top:10px;
 margin-right:10px;
+font-size:16px;
+}
+
+button:hover{
+background:#6d1430;
 }
 
 </style>
@@ -74,7 +97,9 @@ margin-right:10px;
 <body>
 
 <header>
-<h1>Meenakari Weavers</h1>
+
+<h1>MEENAKARI WEAVERS</h1>
+
 </header>
 
 <div class="product">
@@ -89,17 +114,30 @@ margin-right:10px;
 
 <p class="price" id="price"></p>
 
+<div class="discount">
+🔥 Limited Time Offer
+</div>
+
 <p>
-Premium handcrafted saree from Meenakari Weavers.
-Perfect for weddings, festivals and special occasions.
+
+Premium handcrafted saree from
+MEENAKARI WEAVERS.
+
+Perfect for weddings,
+festivals and special occasions.
+
 </p>
 
 <button onclick="addToCart()">
+
 Add To Cart
+
 </button>
 
-<button onclick="window.location.href='checkout.html'">
+<button onclick="buyNow()">
+
 Buy Now
+
 </button>
 
 </div>
@@ -112,88 +150,105 @@ const sarees = {
 
 royalsilk:{
 name:"Royal Silk Saree",
-price:"2499",
-old:"₹2999",
-image:"images/royal-silk.jpg"
+price:"1999",
+old:"₹2499",
+image:"royal-silk.jpg"
 },
 
 kanchipuram:{
 name:"Royal Kanchipuram Silk",
-price:"3299",
-old:"₹3999",
-image:"images/kanchipuram.jpg"
+price:"2599",
+old:"₹3299",
+image:"kanchipuram.jpg"
 },
 
 banarasi:{
 name:"Banarasi Gold Weave",
-price:"2999",
-old:"₹3599",
-image:"images/banarasi-gold.jpg"
+price:"2499",
+old:"₹2999",
+image:"banarasi-gold.jpg"
 },
 
 weddingred:{
 name:"Wedding Red Royal",
-price:"3499",
-old:"₹4299",
-image:"images/wedding-red.jpg"
+price:"2599",
+old:"₹3499",
+image:"wedding-red.jpg"
 },
 
 designer:{
 name:"Designer Royal Fusion",
 price:"2199",
 old:"₹2799",
-image:"images/designer.jpg"
+image:"designer.jpg"
 },
 
 peacock:{
 name:"Peacock Blue Silk",
-price:"2799",
-old:"₹3399",
-image:"images/peacock-blue.jpg"
+price:"1999",
+old:"₹2799",
+image:"peacock-blue.jpg"
 },
 
 floral:{
 name:"Floral Cotton Elegance",
 price:"1499",
 old:"₹1999",
-image:"images/floral-cotton.jpg"
+image:"floral-cotton.jpg"
 },
 
 bridal:{
 name:"Premium Bridal Heritage",
-price:"4999",
-old:"₹5999",
-image:"images/bridal.jpg"
+price:"3999",
+old:"₹4999",
+image:"bridal.jpg"
 }
 
 };
 
-const params = new URLSearchParams(window.location.search);
+const params =
+new URLSearchParams(
+window.location.search
+);
 
-const product = params.get("product");
+const product =
+params.get("product");
 
-const item = sarees[product];
+const item =
+sarees[product];
 
 if(item){
 
-document.getElementById("productName").innerHTML =
+document
+.getElementById("productName")
+.innerHTML =
 item.name;
 
-document.getElementById("price").innerHTML =
+document
+.getElementById("price")
+.innerHTML =
 "₹" + item.price;
 
-document.getElementById("oldPrice").innerHTML =
+document
+.getElementById("oldPrice")
+.innerHTML =
 item.old;
 
-document.getElementById("productImage").src =
+document
+.getElementById("productImage")
+.src =
 item.image;
 
 }
 
+/* ADD TO CART */
+
 function addToCart(){
 
 let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
 
 cart.push({
 
@@ -208,14 +263,42 @@ localStorage.setItem(
 JSON.stringify(cart)
 );
 
-alert("Added To Cart!");
+alert(
+item.name +
+" added to cart!"
+);
 
 window.location.href =
 "cart.html";
 
 }
 
+/* BUY NOW */
+
+function buyNow(){
+
+let cart = [];
+
+cart.push({
+
+name:item.name,
+price:item.price,
+image:item.image
+
+});
+
+localStorage.setItem(
+"cart",
+JSON.stringify(cart)
+);
+
+window.location.href =
+"checkout.html";
+
+}
+
 </script>
 
 </body>
+
 </html>

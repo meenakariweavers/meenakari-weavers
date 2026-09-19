@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cart - Meenakari Weavers</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Cart - MEENAKARI WEAVERS</title>
 
 <style>
 
@@ -27,20 +32,29 @@ text-align:center;
 
 .container{
 width:90%;
-max-width:1200px;
 margin:auto;
 padding:30px 0;
+}
+
+.cart-wrapper{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.cart-items{
+flex:2;
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
 }
 
 .cart-item{
 display:flex;
 gap:20px;
-background:white;
-padding:20px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-align-items:center;
+padding:20px 0;
+border-bottom:1px solid #ddd;
 }
 
 .cart-item img{
@@ -54,36 +68,30 @@ border-radius:8px;
 flex:1;
 }
 
-.item-details h3{
-margin-bottom:10px;
-}
-
 .price{
 font-size:22px;
 font-weight:bold;
 color:#8b1e3f;
-margin-bottom:10px;
+margin-top:10px;
 }
 
 .remove-btn{
+margin-top:10px;
 background:red;
 color:white;
 border:none;
-padding:10px 15px;
+padding:8px 12px;
 border-radius:5px;
 cursor:pointer;
 }
 
 .summary{
+flex:1;
 background:white;
 padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,.15);
-margin-top:20px;
-}
-
-.summary h2{
-margin-bottom:20px;
+height:fit-content;
 }
 
 .summary-row{
@@ -93,7 +101,7 @@ margin-bottom:15px;
 }
 
 .total{
-font-size:26px;
+font-size:24px;
 font-weight:bold;
 color:#8b1e3f;
 }
@@ -110,13 +118,10 @@ font-size:16px;
 margin-top:20px;
 }
 
-.empty-cart{
-background:white;
-padding:40px;
+.empty{
 text-align:center;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.15);
-font-size:22px;
+padding:40px;
+font-size:20px;
 }
 
 </style>
@@ -127,7 +132,7 @@ font-size:22px;
 
 <header>
 
-<h1>Meenakari Weavers</h1>
+<h1>MEENAKARI WEAVERS</h1>
 
 <p>Your Shopping Cart</p>
 
@@ -135,34 +140,55 @@ font-size:22px;
 
 <div class="container">
 
+<div class="cart-wrapper">
+
+<div class="cart-items">
+
+<h2>Items in Cart</h2>
+
 <div id="cartItems"></div>
+
+</div>
 
 <div class="summary">
 
 <h2>Order Summary</h2>
 
 <div class="summary-row">
+
 <span>Subtotal</span>
+
 <span id="subtotal">₹0</span>
+
 </div>
 
 <div class="summary-row">
+
 <span>GST (5%)</span>
+
 <span id="gst">₹0</span>
+
 </div>
 
 <hr><br>
 
 <div class="summary-row total">
+
 <span>Total</span>
+
 <span id="total">₹0</span>
+
 </div>
 
-<a href="checkout.html">
-<button class="checkout-btn">
+<button
+class="checkout-btn"
+onclick="goCheckout()">
+
 Proceed To Checkout
+
 </button>
-</a>
+
+</div>
 
 </div>
 
@@ -171,41 +197,49 @@ Proceed To Checkout
 <script>
 
 let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
 
-let cartContainer =
+let cartItems =
 document.getElementById("cartItems");
-
-function loadCart(){
-
-cartContainer.innerHTML = "";
 
 let subtotal = 0;
 
-if(cart.length === 0){
+function loadCart(){
 
-cartContainer.innerHTML = `
-<div class="empty-cart">
-Your Cart Is Empty
-</div>
-`;
+cartItems.innerHTML="";
 
-document.getElementById("subtotal").innerHTML = "₹0";
-document.getElementById("gst").innerHTML = "₹0";
-document.getElementById("total").innerHTML = "₹0";
+subtotal = 0;
+
+if(cart.length===0){
+
+cartItems.innerHTML=
+
+'<div class="empty">🛒 Cart is Empty</div>';
+
+document.getElementById("subtotal")
+.innerHTML="₹0";
+
+document.getElementById("gst")
+.innerHTML="₹0";
+
+document.getElementById("total")
+.innerHTML="₹0";
 
 return;
+
 }
 
 cart.forEach((item,index)=>{
 
 subtotal += Number(item.price);
 
-cartContainer.innerHTML += `
+cartItems.innerHTML += `
 
 <div class="cart-item">
 
-<img src="${item.image}" alt="${item.name}">
+<img src="${item.image}">
 
 <div class="item-details">
 
@@ -231,17 +265,22 @@ Remove
 
 });
 
-let gst = Math.round(subtotal * 0.05);
+let gst =
+Math.round(subtotal * 0.05);
 
-let total = subtotal + gst;
+let total =
+subtotal + gst;
 
-document.getElementById("subtotal").innerHTML =
+document.getElementById("subtotal")
+.innerHTML =
 "₹" + subtotal;
 
-document.getElementById("gst").innerHTML =
+document.getElementById("gst")
+.innerHTML =
 "₹" + gst;
 
-document.getElementById("total").innerHTML =
+document.getElementById("total")
+.innerHTML =
 "₹" + total;
 
 }
@@ -259,9 +298,27 @@ loadCart();
 
 }
 
+function goCheckout(){
+
+if(cart.length===0){
+
+alert(
+"Your cart is empty!"
+);
+
+return;
+
+}
+
+window.location.href =
+"checkout.html";
+
+}
+
 loadCart();
 
 </script>
 
 </body>
+
 </html>
